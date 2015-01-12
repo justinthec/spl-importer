@@ -7,7 +7,7 @@ Ruby Script to Import the Starcraft 2 Proleague schedule into any Google Calenda
 
 # Installation
 
-1. Clone this git repo
+1. Download this folder using the "Download ZIP" button on the right side of the repo webpage.
 
 2. Install Nokogiri - 
 (*gem install nokogiri* or whatever your OS needs: http://www.nokogiri.org/tutorials/installing_nokogiri.html)
