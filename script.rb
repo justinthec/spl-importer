@@ -92,15 +92,15 @@ client_secrets = Google::APIClient::ClientSecrets.load
 # Run installed application flow. Check the samples for a more
 # complete example that saves the credentials between runs.
 flow = Google::APIClient::InstalledAppFlow.new(
-  :client_id => client_secrets.client_id,
-  :client_secret => client_secrets.client_secret,
-  :scope => ['https://www.googleapis.com/auth/calendar']
+	:client_id => client_secrets.client_id,
+	:client_secret => client_secrets.client_secret,
+	:scope => ['https://www.googleapis.com/auth/calendar']
 )
 client.authorization = flow.authorize
 
 # Get list of calendars
 list_of_calendars = client.execute(
-  :api_method => calendar.calendar_list.list,
+	:api_method => calendar.calendar_list.list,
 )
 
 puts "Google API authenticated..."
