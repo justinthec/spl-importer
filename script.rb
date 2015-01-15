@@ -18,6 +18,8 @@ matches = []
 
 # Match class
 class Match
+	attr_reader :team1, :team2, :startyear, :startmonth, :startdate, :starthour, :startmin
+
 	def initialize(team1, team2, printable_time, startyear, startmonth, startdate, starthour, startmin)
 		@team1 = team1
 		@team2 = team2
@@ -28,29 +30,9 @@ class Match
 		@starthour = Integer(starthour)
 		@startmin = Integer(startmin)
 	end
-	def team1
-		@team1
-	end
-	def team2
-		@team2
-	end
+	
 	def print
 		puts "#{@team1} vs #{@team2} at #{@printable_time}"
-	end
-	def startyear
-		@startyear
-	end
-	def startmonth
-		@startmonth
-	end
-	def startdate
-		@startdate
-	end
-	def starthour
-		@starthour
-	end
-	def startmin
-		@startmin
 	end
 end
 
