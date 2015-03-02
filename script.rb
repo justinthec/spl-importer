@@ -10,8 +10,9 @@ require 'google/api_client/auth/installed_app'
 require 'json'
 require 'date'
 
-# Open Liquipedia Page for parsing the matches
-doc = Nokogiri::HTML(open('http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_1/Round_Robin'))
+# Pages array to store the pages we will pull the matches from
+pages = ['http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_1/Round_Robin',
+         'http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_2/Round_Robin']
 
 # Matches array to store the matches we will add to the Calendar
 matches = []
@@ -36,22 +37,27 @@ class Match
   end
 end
 
-# Parse through the HTML for the match info and populate the matches array
-doc.css('#mw-content-text div[style="display:inline-block; vertical-align: top; margin: 0 0 0 0;padding-right:2em;"]').each do |match|
-  if (match.content.strip != "") then
-    team1 = match.css('table')[0].css('tr td')[0].content.gsub("\302\240", ' ').strip
-    team2 = match.css('table')[0].css('tr td')[3].content.gsub("\302\240", ' ').strip
-    time = match.css('table')[1].css('tr th span[style="margin-left:40px; font-size:85%; line-height:90%;"]').text
+pages.each do |page|
+  # Open Liquipedia Page for parsing the matches
+  doc = Nokogiri::HTML(open(page))
 
-    time_array = time.split
-    year = time_array[2]
-    month = Date::MONTHNAMES.index(time_array[0])
-    date = time_array[1].gsub(/,/, '')
-    hour = time_array[3].slice(0..1)
-    min = time_array[3].slice(3..4)
+  # Parse through the HTML for the match info and populate the matches array
+  doc.css('#mw-content-text div[style="display:inline-block; vertical-align: top; margin: 0 0 0 0;padding-right:2em;"]').each do |match|
+    if (match.content.strip != "") then
+      team1 = match.css('table')[0].css('tr td')[0].content.gsub("\302\240", ' ').strip
+      team2 = match.css('table')[0].css('tr td')[3].content.gsub("\302\240", ' ').strip
+      time = match.css('table')[1].css('tr th span').select{|link| link['style'] =~ /margin-left:.*40px;.*font-size:.*85%;.*line-height:.*90%;/}[0].text
 
-    match = Match.new(team1, team2, time, year, month, date, hour, min)
-    matches.push(match)
+      time_array = time.split
+      year = time_array[2]
+      month = Date::MONTHNAMES.index(time_array[0])
+      date = time_array[1].gsub(/,/, '')
+      hour = time_array[3].slice(0..1)
+      min = time_array[3].slice(3..4)
+
+      match = Match.new(team1, team2, time, year, month, date, hour, min)
+      matches.push(match)
+    end
   end
 end
 
