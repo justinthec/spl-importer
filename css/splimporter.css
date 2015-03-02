@@ -1,0 +1,87 @@
+body {
+	font-family: 'Raleway', sans-serif;
+	background: #F1F1F2;
+}
+
+.spl-logo {
+	opacity: 1;
+	max-height: 42px;
+	width: auto;
+	transition: opacity 0.5s ease;
+}
+
+.spl-logo:hover, a.spl-link:hover .spl-logo {
+	opacity: 0.8;
+}
+
+a.spl-link {
+	font-size: 70px;
+	font-weight: 900;
+	text-decoration: none;
+	width: 100%;
+	transition: 0.5s ease;
+	letter-spacing: 3px;
+	margin: 40px;
+	color: #01429A;
+}
+
+a.spl-link:hover {
+	color: #3367AF;
+}
+
+.spl-link-container {
+	margin-top: 15%;
+}
+
+
+/* Data Wipe Button from http://codepen.io/ftntravis/pen/pvbdWe */
+
+* {
+  box-sizing: border-box;
+}
+
+[data-wipe] {
+  display: inline-block;
+  padding: 12px 18px;
+  text-decoration: none;
+  position: relative;
+  border: 2px solid #0D9DDA;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: left;
+  color: #0D9DDA;
+  overflow: hidden;
+}
+[data-wipe]:before, [data-wipe]:after {
+  content: attr(data-wipe);
+  padding-top: inherit;
+  padding-bottom: inherit;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  color: #F1F1F2;
+  background: #0D9DDA;
+}
+[data-wipe]:before {
+  left: 0;
+  text-indent: 18px;
+  width: 0;
+}
+[data-wipe]:after {
+  padding-left: inherit;
+  padding-right: inherit;
+  left: 100%;
+  text-indent: calc(-100% - 36px);
+  transition: 0.2s ease-in-out;
+}
+[data-wipe]:hover:before {
+  width: 100%;
+  transition: width 0.2s ease-in-out;
+}
+[data-wipe]:hover:after {
+  left: 0;
+  text-indent: 0;
+  transition: 0s 0.2s ease-in-out;
+}
