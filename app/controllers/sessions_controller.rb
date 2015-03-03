@@ -83,14 +83,11 @@ class SessionsController < ApplicationController
 		# in your production code. Check the samples for more details.
 		calendar = client.discovered_api('calendar', 'v3')
 
-		# Load client secrets from your client_secrets.json.
-		client_secrets = Google::APIClient::ClientSecrets.load
-
 		# Run installed application flow. Check the samples for a more
 		# complete example that saves the credentials between runs.
 		flow = Google::APIClient::InstalledAppFlow.new(
-		  :client_id => client_secrets.client_id,
-		  :client_secret => client_secrets.client_secret,
+		  :client_id => Rails.application.secrets.client_id,
+		  :client_secret => Rails.application.secrets.client_secret,
 		  :scope => ['https://www.googleapis.com/auth/calendar']
 		)
 		client.authorization = flow.authorize
