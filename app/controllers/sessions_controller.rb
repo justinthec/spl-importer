@@ -78,19 +78,13 @@ class SessionsController < ApplicationController
 		  :application_version => '1.0.0'
 		)
 
+		# Authenticate our client with the token we recieved from the Google API
+		client.authorization.access_token = @auth['token']
+
 		# Initialize Google Calendar API. Note this will make a request to the
 		# discovery service every time, so be sure to use serialization
 		# in your production code. Check the samples for more details.
 		calendar = client.discovered_api('calendar', 'v3')
-
-		# Run installed application flow. Check the samples for a more
-		# complete example that saves the credentials between runs.
-		flow = Google::APIClient::InstalledAppFlow.new(
-		  :client_id => Rails.application.secrets.client_id,
-		  :client_secret => Rails.application.secrets.client_secret,
-		  :scope => ['https://www.googleapis.com/auth/calendar']
-		)
-		client.authorization = flow.authorize
 
 		# Get list of calendars
 		list_of_calendars = client.execute(
