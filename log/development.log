@@ -1897,3 +1897,201 @@ Started GET "/assets/application-66d7f8caa3e832e7ebf5fc741fcca54d.js?body=1" for
 
 
 Started GET "/assets/spl-logo-97ceb46e114a9140594d7511afc3a873.png" for 127.0.0.1 at 2015-03-02 22:39:49 -0500
+
+
+Started GET "/" for 127.0.0.1 at 2015-03-02 23:23:39 -0500
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (27.1ms)
+Completed 200 OK in 362ms (Views: 334.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-03-02 23:23:40 -0500
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 113ms (Views: 112.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/splimporter-ab90b7974dd0f5059e476e61263db8ee.css?body=1" for 127.0.0.1 at 2015-03-02 23:23:41 -0500
+
+
+Started GET "/assets/application-ae0edead84545c693be5d61d18a51424.css?body=1" for 127.0.0.1 at 2015-03-02 23:23:41 -0500
+
+
+Started GET "/assets/bootstrap.min-389e1802cb93455d7e120d991cf7633e.css?body=1" for 127.0.0.1 at 2015-03-02 23:23:41 -0500
+
+
+Started GET "/assets/spl-logo-97ceb46e114a9140594d7511afc3a873.png" for 127.0.0.1 at 2015-03-02 23:23:41 -0500
+
+
+Started GET "/assets/jquery_ujs-8163409ac89d9587bb33a62f6f74d283.js?body=1" for 127.0.0.1 at 2015-03-02 23:23:41 -0500
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-03-02 23:23:41 -0500
+
+
+Started GET "/assets/jquery-5c8e9a5f2706a5ae36c57c9b8b1693b8.js?body=1" for 127.0.0.1 at 2015-03-02 23:23:41 -0500
+
+
+Started GET "/assets/bootstrap.min-759065b3d223bc01ce2f7ad79e06c909.js?body=1" for 127.0.0.1 at 2015-03-02 23:23:41 -0500
+
+
+Started GET "/assets/application-66d7f8caa3e832e7ebf5fc741fcca54d.js?body=1" for 127.0.0.1 at 2015-03-02 23:23:41 -0500
+
+
+Started GET "/assets/favicon-3538de9d4c59c50204b5cdc41a71c7fa.ico" for 127.0.0.1 at 2015-03-02 23:23:41 -0500
+
+
+Started GET "/" for 127.0.0.1 at 2015-03-02 23:25:28 -0500
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 57ms (Views: 56.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/bootstrap.min-389e1802cb93455d7e120d991cf7633e.css?body=1" for 127.0.0.1 at 2015-03-02 23:25:28 -0500
+
+
+Started GET "/assets/splimporter-17f52acb4bac3cdb54b3b8d722c2923a.css?body=1" for 127.0.0.1 at 2015-03-02 23:25:28 -0500
+
+
+Started GET "/assets/application-9d546240fc0437c8a4ce36a69c37df05.css?body=1" for 127.0.0.1 at 2015-03-02 23:25:28 -0500
+
+
+Started GET "/assets/spl-logo-97ceb46e114a9140594d7511afc3a873.png" for 127.0.0.1 at 2015-03-02 23:25:28 -0500
+
+
+Started GET "/assets/jquery_ujs-8163409ac89d9587bb33a62f6f74d283.js?body=1" for 127.0.0.1 at 2015-03-02 23:25:28 -0500
+
+
+Started GET "/assets/jquery-5c8e9a5f2706a5ae36c57c9b8b1693b8.js?body=1" for 127.0.0.1 at 2015-03-02 23:25:28 -0500
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-03-02 23:25:28 -0500
+
+
+Started GET "/assets/bootstrap.min-759065b3d223bc01ce2f7ad79e06c909.js?body=1" for 127.0.0.1 at 2015-03-02 23:25:28 -0500
+
+
+Started GET "/assets/application-66d7f8caa3e832e7ebf5fc741fcca54d.js?body=1" for 127.0.0.1 at 2015-03-02 23:25:28 -0500
+
+
+Started GET "/" for 127.0.0.1 at 2015-03-02 23:25:43 -0500
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 58ms (Views: 56.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/bootstrap.min-389e1802cb93455d7e120d991cf7633e.css?body=1" for 127.0.0.1 at 2015-03-02 23:25:44 -0500
+
+
+Started GET "/assets/application-b771ec6b9c92b12103178b1405f879ff.css?body=1" for 127.0.0.1 at 2015-03-02 23:25:44 -0500
+
+
+Started GET "/assets/spl-logo-97ceb46e114a9140594d7511afc3a873.png" for 127.0.0.1 at 2015-03-02 23:25:44 -0500
+
+
+Started GET "/assets/jquery_ujs-8163409ac89d9587bb33a62f6f74d283.js?body=1" for 127.0.0.1 at 2015-03-02 23:25:44 -0500
+
+
+Started GET "/assets/splimporter-32dd2eeef83811289370ec7635c90dfb.css?body=1" for 127.0.0.1 at 2015-03-02 23:25:44 -0500
+
+
+Started GET "/assets/jquery-5c8e9a5f2706a5ae36c57c9b8b1693b8.js?body=1" for 127.0.0.1 at 2015-03-02 23:25:44 -0500
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-03-02 23:25:44 -0500
+
+
+Started GET "/assets/bootstrap.min-759065b3d223bc01ce2f7ad79e06c909.js?body=1" for 127.0.0.1 at 2015-03-02 23:25:44 -0500
+
+
+Started GET "/assets/application-66d7f8caa3e832e7ebf5fc741fcca54d.js?body=1" for 127.0.0.1 at 2015-03-02 23:25:44 -0500
+
+
+Started GET "/" for 127.0.0.1 at 2015-03-02 23:26:18 -0500
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 52ms (Views: 51.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/bootstrap.min-389e1802cb93455d7e120d991cf7633e.css?body=1" for 127.0.0.1 at 2015-03-02 23:26:18 -0500
+
+
+Started GET "/assets/splimporter-32dd2eeef83811289370ec7635c90dfb.css?body=1" for 127.0.0.1 at 2015-03-02 23:26:18 -0500
+
+
+Started GET "/assets/jquery-5c8e9a5f2706a5ae36c57c9b8b1693b8.js?body=1" for 127.0.0.1 at 2015-03-02 23:26:18 -0500
+
+
+Started GET "/assets/application-b771ec6b9c92b12103178b1405f879ff.css?body=1" for 127.0.0.1 at 2015-03-02 23:26:18 -0500
+
+
+Started GET "/assets/jquery_ujs-8163409ac89d9587bb33a62f6f74d283.js?body=1" for 127.0.0.1 at 2015-03-02 23:26:18 -0500
+
+
+Started GET "/assets/spl-logo-97ceb46e114a9140594d7511afc3a873.png" for 127.0.0.1 at 2015-03-02 23:26:18 -0500
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-03-02 23:26:18 -0500
+
+
+Started GET "/assets/bootstrap.min-759065b3d223bc01ce2f7ad79e06c909.js?body=1" for 127.0.0.1 at 2015-03-02 23:26:18 -0500
+
+
+Started GET "/assets/application-66d7f8caa3e832e7ebf5fc741fcca54d.js?body=1" for 127.0.0.1 at 2015-03-02 23:26:18 -0500
+
+
+Started GET "/assets/bootstrap.min-389e1802cb93455d7e120d991cf7633e.css?body=1" for 127.0.0.1 at 2015-03-02 23:26:24 -0500
+
+
+Started GET "/assets/splimporter-32dd2eeef83811289370ec7635c90dfb.css?body=1" for 127.0.0.1 at 2015-03-02 23:26:24 -0500
+
+
+Started GET "/assets/application-b771ec6b9c92b12103178b1405f879ff.css?body=1" for 127.0.0.1 at 2015-03-02 23:26:24 -0500
+
+
+Started GET "/assets/bootstrap.min-389e1802cb93455d7e120d991cf7633e.css?body=1" for 127.0.0.1 at 2015-03-02 23:26:53 -0500
+
+
+Started GET "/assets/splimporter-32dd2eeef83811289370ec7635c90dfb.css?body=1" for 127.0.0.1 at 2015-03-02 23:26:53 -0500
+
+
+Started GET "/assets/application-b771ec6b9c92b12103178b1405f879ff.css?body=1" for 127.0.0.1 at 2015-03-02 23:26:53 -0500
+
+
+Started GET "/" for 127.0.0.1 at 2015-03-02 23:29:43 -0500
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 58ms (Views: 57.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application-3b320f964ec32681fe0bfce1c98d59c2.css?body=1" for 127.0.0.1 at 2015-03-02 23:29:43 -0500
+
+
+Started GET "/assets/splimporter-45843e7b65adcd50a799967266881ddd.css?body=1" for 127.0.0.1 at 2015-03-02 23:29:43 -0500
+
+
+Started GET "/assets/spl-logo-97ceb46e114a9140594d7511afc3a873.png" for 127.0.0.1 at 2015-03-02 23:29:43 -0500
+
+
+Started GET "/assets/bootstrap.min-389e1802cb93455d7e120d991cf7633e.css?body=1" for 127.0.0.1 at 2015-03-02 23:29:43 -0500
+
+
+Started GET "/assets/jquery-5c8e9a5f2706a5ae36c57c9b8b1693b8.js?body=1" for 127.0.0.1 at 2015-03-02 23:29:43 -0500
+
+
+Started GET "/assets/jquery_ujs-8163409ac89d9587bb33a62f6f74d283.js?body=1" for 127.0.0.1 at 2015-03-02 23:29:43 -0500
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-03-02 23:29:43 -0500
+
+
+Started GET "/assets/bootstrap.min-759065b3d223bc01ce2f7ad79e06c909.js?body=1" for 127.0.0.1 at 2015-03-02 23:29:43 -0500
+
+
+Started GET "/assets/application-66d7f8caa3e832e7ebf5fc741fcca54d.js?body=1" for 127.0.0.1 at 2015-03-02 23:29:43 -0500
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2015-03-02 23:30:04 -0500
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2015-03-02 23:30:04 -0500
