@@ -11,4 +11,5 @@ gem 'rails_12factor', group: :production
 gem 'uglifier'
 gem 'nokogiri'
 gem 'google-api-client'
+gem 'newrelic_rpm'
 ruby "2.1.2"
