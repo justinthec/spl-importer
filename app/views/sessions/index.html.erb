@@ -4,11 +4,11 @@
   </div>
   <br />
   <div class="row text-center">
-    <%= link_to "Import Schedule", '/auth/google_oauth2', class: "btn", data: { wipe: "Import Schedule" } %>
+    <%= link_to "Import Schedule", '/auth/google_oauth2', class: "btn", id: "authButton", data: { wipe: "Import Schedule" } %>
   </div>
   <br />
   <div class="row text-center">
-    <div class="loader">
+    <div class="loader" id="spinner">
       Loading...
       <div class="ball"></div>
       <div class="ball"></div>

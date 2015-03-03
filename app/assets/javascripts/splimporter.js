@@ -1,3 +1,4 @@
-$( ".btn" ).click(function() {
-  $( ".footer" ).addClass("show");
+$( "#authButton" ).click(function() {
+	console.log("afub");
+  $( "#spinner" ).addClass("show");
 });
