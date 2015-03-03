@@ -18,8 +18,12 @@ class SessionsController < ApplicationController
 	  end
 	  
 	  def print
-	    puts "#{@team1} vs #{@team2} at #{@printable_time}"
+	    puts self.info
 	  end
+
+	 	def info
+	 		return "#{@team1} vs #{@team2} at #{@printable_time}"
+	 	end
 	end
 
   def success

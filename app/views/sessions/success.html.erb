@@ -1,4 +1,13 @@
-<% @matches.each do |match| %>
-  <h4><%= match.print %></h4>
-<% end %>
-YOLO
+<div class="container">
+  <div class="row text-center">
+  	<div class="page-header">
+		  <h1>Import Successful! <small><b class="text-success"><%= @matches.count %></b> matches added</small></h1>
+		</div>
+		<br />
+    <ul class="list-group">
+		  <% @matches.each do |match| %>
+		  	<li class="list-group-item"><%= match.print %></li>
+			<% end %>
+		</ul>
+  </div>
+</div>
