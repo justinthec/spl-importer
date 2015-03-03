@@ -1,4 +1,3 @@
-<% @auth.each do |key, value| %>
-  <h1><%= key %> </h1>
-  <p><%= value %> </p>
+<% @matches.each do |match| %>
+  <h4><%= match.print %></h4>
 <% end %>

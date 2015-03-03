@@ -2,27 +2,7 @@ class SessionsController < ApplicationController
   def new
   end
 
-  def success
-    @auth = request.env['omniauth.auth']['credentials']
-    
-	require 'nokogiri'
-	require 'open-uri'
-
-	require 'google/api_client'
-	require 'google/api_client/client_secrets'
-	require 'google/api_client/auth/installed_app'
-
-	require 'json'
-	require 'date'
-
-	# Pages array to store the pages we will pull the matches from
-	pages = ['http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_1/Round_Robin',
-	         'http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_2/Round_Robin']
-
-	# Matches array to store the matches we will add to the Calendar
-	matches = []
-
-	# Match class
+  # Match class
 	class Match
 	  attr_reader :team1, :team2, :startyear, :startmonth, :startdate, :starthour, :startmin
 
@@ -42,119 +22,139 @@ class SessionsController < ApplicationController
 	  end
 	end
 
-	pages.each do |page|
-	  # Open Liquipedia Page for parsing the matches
-	  doc = Nokogiri::HTML(open(page))
+  def success
+    @auth = request.env['omniauth.auth']['credentials']
 
-	  # Parse through the HTML for the match info and populate the matches array
-	  doc.css('#mw-content-text div[style="display:inline-block; vertical-align: top; margin: 0 0 0 0;padding-right:2em;"]').each do |match|
-	    if (match.content.strip != "") then
-	      team1 = match.css('table')[0].css('tr td')[0].content.gsub("\302\240", ' ').strip
-	      team2 = match.css('table')[0].css('tr td')[3].content.gsub("\302\240", ' ').strip
-	      time = match.css('table')[1].css('tr th span').select{|link| link['style'] =~ /margin-left:.*40px;.*font-size:.*85%;.*line-height:.*90%;/}[0].text
+		require 'nokogiri'
+		require 'open-uri'
 
-	      time_array = time.split
-	      year = time_array[2]
-	      month = Date::MONTHNAMES.index(time_array[0])
-	      date = time_array[1].gsub(/,/, '')
-	      hour = time_array[3].slice(0..1)
-	      min = time_array[3].slice(3..4)
+		require 'google/api_client'
+		require 'google/api_client/client_secrets'
+		require 'google/api_client/auth/installed_app'
 
-	      match = Match.new(team1, team2, time, year, month, date, hour, min)
-	      matches.push(match)
-	    end
-	  end
-	end
+		require 'json'
+		require 'date'
 
-	puts "#{matches.count} Matches found..."
+		# Pages array to store the pages we will pull the matches from
+		@pages = ['http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_1/Round_Robin',
+		         'http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_2/Round_Robin']
 
-	# # Initialize the client.
-	# client = Google::APIClient.new(
-	#   :application_name => 'SPL Importer',
-	#   :application_version => '1.0.0'
-	# )
+		# Matches array to store the matches we will add to the Calendar
+		@matches = []
 
-	# # Initialize Google Calendar API. Note this will make a request to the
-	# # discovery service every time, so be sure to use serialization
-	# # in your production code. Check the samples for more details.
-	# calendar = client.discovered_api('calendar', 'v3')
+		@pages.each do |page|
+		  # Open Liquipedia Page for parsing the matches
+		  doc = Nokogiri::HTML(open(page))
 
-	# # Load client secrets from your client_secrets.json.
-	# client_secrets = Google::APIClient::ClientSecrets.load
+		  # Parse through the HTML for the match info and populate the matches array
+		  doc.css('#mw-content-text div[style="display:inline-block; vertical-align: top; margin: 0 0 0 0;padding-right:2em;"]').each do |match|
+		    if (match.content.strip != "") then
+		      team1 = match.css('table')[0].css('tr td')[0].content.gsub("\302\240", ' ').strip
+		      team2 = match.css('table')[0].css('tr td')[3].content.gsub("\302\240", ' ').strip
+		      time = match.css('table')[1].css('tr th span').select{|link| link['style'] =~ /margin-left:.*40px;.*font-size:.*85%;.*line-height:.*90%;/}[0].text
 
-	# # Run installed application flow. Check the samples for a more
-	# # complete example that saves the credentials between runs.
-	# flow = Google::APIClient::InstalledAppFlow.new(
-	#   :client_id => client_secrets.client_id,
-	#   :client_secret => client_secrets.client_secret,
-	#   :scope => ['https://www.googleapis.com/auth/calendar']
-	# )
-	# client.authorization = flow.authorize
+		      time_array = time.split
+		      year = time_array[2]
+		      month = Date::MONTHNAMES.index(time_array[0])
+		      date = time_array[1].gsub(/,/, '')
+		      hour = time_array[3].slice(0..1)
+		      min = time_array[3].slice(3..4)
 
-	# # Get list of calendars
-	# list_of_calendars = client.execute(
-	#   :api_method => calendar.calendar_list.list,
-	# )
+		      match = Match.new(team1, team2, time, year, month, date, hour, min)
+		      matches.push(match)
+		    end
+		  end
+		end
 
-	# puts "Google API authenticated..."
+		puts "#{matches.count} Matches found..."
 
-	# # Deletes SPL Calendar if it already exists
-	# list_of_calendars.data.items.each do |calendar_item|
-	#   if (calendar_item.summary == "Starcraft 2 Proleague") then
-	#     puts "SPL Calendar found, deleting..."
-	#     delete_spl = client.execute(
-	#       :api_method => calendar.calendars.delete,
-	#       :parameters => {'calendarId' => calendar_item.id}
-	#     )
-	#     puts "SPL Calendar deleted..."
-	#   end
-	# end
+		# # Initialize the client.
+		# client = Google::APIClient.new(
+		#   :application_name => 'SPL Importer',
+		#   :application_version => '1.0.0'
+		# )
 
-	# # Creates new SPL Calendar
-	# spl_calendar = {
-	#   'summary' => "Starcraft 2 Proleague",
-	#   'timeZone' => "Asia/Seoul"
-	# }
+		# # Initialize Google Calendar API. Note this will make a request to the
+		# # discovery service every time, so be sure to use serialization
+		# # in your production code. Check the samples for more details.
+		# calendar = client.discovered_api('calendar', 'v3')
 
-	# create_spl = client.execute(
-	#   :api_method => calendar.calendars.insert,
-	#   :body => JSON.dump(spl_calendar),
-	#   :headers => {'Content-Type' => 'application/json'}
-	# )
+		# # Load client secrets from your client_secrets.json.
+		# client_secrets = Google::APIClient::ClientSecrets.load
 
-	# puts "SPL Calendar created..."
+		# # Run installed application flow. Check the samples for a more
+		# # complete example that saves the credentials between runs.
+		# flow = Google::APIClient::InstalledAppFlow.new(
+		#   :client_id => client_secrets.client_id,
+		#   :client_secret => client_secrets.client_secret,
+		#   :scope => ['https://www.googleapis.com/auth/calendar']
+		# )
+		# client.authorization = flow.authorize
 
-	# # Save SPL Calendar ID for creating events
-	# spl_calendar_id = create_spl.data.id
+		# # Get list of calendars
+		# list_of_calendars = client.execute(
+		#   :api_method => calendar.calendar_list.list,
+		# )
 
-	# puts "Importing Matches..."
+		# puts "Google API authenticated..."
 
-	# # Creates Events for each of the Matches
-	# matches.each do |match|
-	#   match_event = {
-	#     'summary' => "#{match.team1} vs #{match.team2}",
-	#     'start' => {
-	#       'dateTime' => DateTime.new(match.startyear, match.startmonth, match.startdate, match.starthour, match.startmin, 0, '+9').to_s,
-	#       'timeZone' => "Asia/Seoul"
-	#     },
-	#     'end' => {
-	#       'dateTime' => DateTime.new(match.startyear, match.startmonth, match.startdate, match.starthour+1, match.startmin, 0, '+9').to_s,
-	#       'timeZone' => "Asia/Seoul"
-	#     }
-	#   }
+		# # Deletes SPL Calendar if it already exists
+		# list_of_calendars.data.items.each do |calendar_item|
+		#   if (calendar_item.summary == "Starcraft 2 Proleague") then
+		#     puts "SPL Calendar found, deleting..."
+		#     delete_spl = client.execute(
+		#       :api_method => calendar.calendars.delete,
+		#       :parameters => {'calendarId' => calendar_item.id}
+		#     )
+		#     puts "SPL Calendar deleted..."
+		#   end
+		# end
 
-	#   create_match = client.execute(
-	#     :api_method => calendar.events.insert,
-	#     :parameters => {'calendarId' => spl_calendar_id},
-	#     :body => JSON.dump(match_event),
-	#     :headers => {'Content-Type' => 'application/json'}
-	#   )
+		# # Creates new SPL Calendar
+		# spl_calendar = {
+		#   'summary' => "Starcraft 2 Proleague",
+		#   'timeZone' => "Asia/Seoul"
+		# }
 
-	#   match.print
-	# end
+		# create_spl = client.execute(
+		#   :api_method => calendar.calendars.insert,
+		#   :body => JSON.dump(spl_calendar),
+		#   :headers => {'Content-Type' => 'application/json'}
+		# )
 
-	# Done
-	puts "Match Import Complete!"
+		# puts "SPL Calendar created..."
+
+		# # Save SPL Calendar ID for creating events
+		# spl_calendar_id = create_spl.data.id
+
+		# puts "Importing Matches..."
+
+		# # Creates Events for each of the Matches
+		# matches.each do |match|
+		#   match_event = {
+		#     'summary' => "#{match.team1} vs #{match.team2}",
+		#     'start' => {
+		#       'dateTime' => DateTime.new(match.startyear, match.startmonth, match.startdate, match.starthour, match.startmin, 0, '+9').to_s,
+		#       'timeZone' => "Asia/Seoul"
+		#     },
+		#     'end' => {
+		#       'dateTime' => DateTime.new(match.startyear, match.startmonth, match.startdate, match.starthour+1, match.startmin, 0, '+9').to_s,
+		#       'timeZone' => "Asia/Seoul"
+		#     }
+		#   }
+
+		#   create_match = client.execute(
+		#     :api_method => calendar.events.insert,
+		#     :parameters => {'calendarId' => spl_calendar_id},
+		#     :body => JSON.dump(match_event),
+		#     :headers => {'Content-Type' => 'application/json'}
+		#   )
+
+		#   match.print
+		# end
+
+		# Done
+		puts "Match Import Complete!"
 
   end
 end

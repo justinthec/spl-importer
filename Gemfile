@@ -9,4 +9,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'rails_12factor', group: :production
 gem 'uglifier'
+gem 'nokogiri'
+gem 'google-api-client'
 ruby "2.1.2"
