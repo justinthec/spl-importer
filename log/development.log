@@ -2242,3 +2242,21 @@ Started GET "/assets/application-493cf2b16513e73f9991789f1cdff333.js?body=1" for
 
 
 Started GET "/assets/spl-logo-97ceb46e114a9140594d7511afc3a873.png" for 127.0.0.1 at 2015-03-03 00:33:22 -0500
+
+
+Started GET "/" for 127.0.0.1 at 2015-03-03 00:54:37 -0500
+Processing by SessionsController#index as HTML
+  Rendered sessions/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 251ms (Views: 250.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/splimporter-6c94c069eadc1e5a24935cec945c3190.css?body=1" for 127.0.0.1 at 2015-03-03 00:54:38 -0500
+
+
+Started GET "/assets/application-334931e69a71ba9aa9f509d1b1d614a6.css?body=1" for 127.0.0.1 at 2015-03-03 00:54:38 -0500
+
+
+Started GET "/assets/application-f9228cbff358984e70e4707871a4f366.js?body=1" for 127.0.0.1 at 2015-03-03 00:54:38 -0500
+
+
+Started GET "/assets/splimporter-d12a22d8a5e5ff49f1407299dcd81590.js?body=1" for 127.0.0.1 at 2015-03-03 00:54:38 -0500
