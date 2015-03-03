@@ -61,12 +61,12 @@ class SessionsController < ApplicationController
 		      min = time_array[3].slice(3..4)
 
 		      match = Match.new(team1, team2, time, year, month, date, hour, min)
-		      matches.push(match)
+		      @matches.push(match)
 		    end
 		  end
 		end
 
-		puts "#{matches.count} Matches found..."
+		puts "#{@matches.count} Matches found..."
 
 		# # Initialize the client.
 		# client = Google::APIClient.new(
