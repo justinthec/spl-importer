@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  def new
+  def index
   end
 
   # Match class

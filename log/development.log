@@ -2095,3 +2095,150 @@ Started GET "/auth/google_oauth2" for 127.0.0.1 at 2015-03-02 23:30:04 -0500
 
 
 Started GET "/auth/google_oauth2" for 127.0.0.1 at 2015-03-02 23:30:04 -0500
+
+
+Started GET "/" for 127.0.0.1 at 2015-03-03 00:24:36 -0500
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (15.8ms)
+Completed 200 OK in 271ms (Views: 259.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/bootstrap.min-389e1802cb93455d7e120d991cf7633e.css?body=1" for 127.0.0.1 at 2015-03-03 00:24:37 -0500
+
+
+Started GET "/assets/splimporter-51f32647d0c19899fefe17cd41ed37cc.css?body=1" for 127.0.0.1 at 2015-03-03 00:24:37 -0500
+
+
+Started GET "/assets/jquery_ujs-8163409ac89d9587bb33a62f6f74d283.js?body=1" for 127.0.0.1 at 2015-03-03 00:24:37 -0500
+
+
+Started GET "/assets/jquery-5c8e9a5f2706a5ae36c57c9b8b1693b8.js?body=1" for 127.0.0.1 at 2015-03-03 00:24:37 -0500
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-03-03 00:24:37 -0500
+
+
+Started GET "/assets/application-db799c2673ec2b60127d9b80d3a044c9.css?body=1" for 127.0.0.1 at 2015-03-03 00:24:37 -0500
+
+
+Started GET "/assets/bootstrap.min-759065b3d223bc01ce2f7ad79e06c909.js?body=1" for 127.0.0.1 at 2015-03-03 00:24:37 -0500
+
+
+Started GET "/assets/application-66d7f8caa3e832e7ebf5fc741fcca54d.js?body=1" for 127.0.0.1 at 2015-03-03 00:24:37 -0500
+
+
+Started GET "/assets/spl-logo-97ceb46e114a9140594d7511afc3a873.png" for 127.0.0.1 at 2015-03-03 00:24:37 -0500
+
+
+Started GET "/" for 127.0.0.1 at 2015-03-03 00:29:41 -0500
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 84ms (Views: 83.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/bootstrap.min-389e1802cb93455d7e120d991cf7633e.css?body=1" for 127.0.0.1 at 2015-03-03 00:29:41 -0500
+
+
+Started GET "/assets/jquery-5c8e9a5f2706a5ae36c57c9b8b1693b8.js?body=1" for 127.0.0.1 at 2015-03-03 00:29:41 -0500
+
+
+Started GET "/assets/jquery_ujs-8163409ac89d9587bb33a62f6f74d283.js?body=1" for 127.0.0.1 at 2015-03-03 00:29:41 -0500
+
+
+Started GET "/assets/splimporter-b275a2678a5083d749dad91b689029df.css?body=1" for 127.0.0.1 at 2015-03-03 00:29:41 -0500
+
+
+Started GET "/assets/application-e8331654deb1660b7b5ccaad3a570bc6.css?body=1" for 127.0.0.1 at 2015-03-03 00:29:41 -0500
+
+
+Started GET "/assets/bootstrap.min-759065b3d223bc01ce2f7ad79e06c909.js?body=1" for 127.0.0.1 at 2015-03-03 00:29:41 -0500
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-03-03 00:29:41 -0500
+
+
+Started GET "/assets/splimporter-459d6c5ef5e85f4d5238eb0ca3192390.js?body=1" for 127.0.0.1 at 2015-03-03 00:29:41 -0500
+
+
+Started GET "/assets/application-493cf2b16513e73f9991789f1cdff333.js?body=1" for 127.0.0.1 at 2015-03-03 00:29:41 -0500
+
+
+Started GET "/assets/spl-logo-97ceb46e114a9140594d7511afc3a873.png" for 127.0.0.1 at 2015-03-03 00:29:41 -0500
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2015-03-03 00:29:45 -0500
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2015-03-03 00:29:46 -0500
+
+
+Started GET "/" for 127.0.0.1 at 2015-03-03 00:31:59 -0500
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 175ms (Views: 173.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/bootstrap.min-389e1802cb93455d7e120d991cf7633e.css?body=1" for 127.0.0.1 at 2015-03-03 00:32:00 -0500
+
+
+Started GET "/assets/splimporter-a21c5184b99ed170f641b452f9cb1ae7.css?body=1" for 127.0.0.1 at 2015-03-03 00:32:00 -0500
+
+
+Started GET "/assets/application-a621f87586f6072ba24f60a58e70b8cb.css?body=1" for 127.0.0.1 at 2015-03-03 00:32:00 -0500
+
+
+Started GET "/assets/spl-logo-97ceb46e114a9140594d7511afc3a873.png" for 127.0.0.1 at 2015-03-03 00:32:00 -0500
+
+
+Started GET "/assets/jquery-5c8e9a5f2706a5ae36c57c9b8b1693b8.js?body=1" for 127.0.0.1 at 2015-03-03 00:32:00 -0500
+
+
+Started GET "/assets/jquery_ujs-8163409ac89d9587bb33a62f6f74d283.js?body=1" for 127.0.0.1 at 2015-03-03 00:32:00 -0500
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-03-03 00:32:00 -0500
+
+
+Started GET "/assets/bootstrap.min-759065b3d223bc01ce2f7ad79e06c909.js?body=1" for 127.0.0.1 at 2015-03-03 00:32:00 -0500
+
+
+Started GET "/assets/splimporter-459d6c5ef5e85f4d5238eb0ca3192390.js?body=1" for 127.0.0.1 at 2015-03-03 00:32:00 -0500
+
+
+Started GET "/assets/application-493cf2b16513e73f9991789f1cdff333.js?body=1" for 127.0.0.1 at 2015-03-03 00:32:00 -0500
+
+
+Started GET "/" for 127.0.0.1 at 2015-03-03 00:33:22 -0500
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 71ms (Views: 69.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/bootstrap.min-389e1802cb93455d7e120d991cf7633e.css?body=1" for 127.0.0.1 at 2015-03-03 00:33:22 -0500
+
+
+Started GET "/assets/splimporter-a1ce8124946cd42fc8db1e759be9ca1f.css?body=1" for 127.0.0.1 at 2015-03-03 00:33:22 -0500
+
+
+Started GET "/assets/application-88f1fc290352fd9b136ab3f95a4d714b.css?body=1" for 127.0.0.1 at 2015-03-03 00:33:22 -0500
+
+
+Started GET "/assets/jquery-5c8e9a5f2706a5ae36c57c9b8b1693b8.js?body=1" for 127.0.0.1 at 2015-03-03 00:33:22 -0500
+
+
+Started GET "/assets/jquery_ujs-8163409ac89d9587bb33a62f6f74d283.js?body=1" for 127.0.0.1 at 2015-03-03 00:33:22 -0500
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-03-03 00:33:22 -0500
+
+
+Started GET "/assets/bootstrap.min-759065b3d223bc01ce2f7ad79e06c909.js?body=1" for 127.0.0.1 at 2015-03-03 00:33:22 -0500
+
+
+Started GET "/assets/splimporter-459d6c5ef5e85f4d5238eb0ca3192390.js?body=1" for 127.0.0.1 at 2015-03-03 00:33:22 -0500
+
+
+Started GET "/assets/application-493cf2b16513e73f9991789f1cdff333.js?body=1" for 127.0.0.1 at 2015-03-03 00:33:22 -0500
+
+
+Started GET "/assets/spl-logo-97ceb46e114a9140594d7511afc3a873.png" for 127.0.0.1 at 2015-03-03 00:33:22 -0500
