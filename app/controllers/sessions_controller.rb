@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def failure
   	# Save Import in database
-		ImportAttempt.create(succeeded: false, match_count: 0, time: DateTime.now)
+		ImportAttempt.create(succeeded: false, match_count: 0, time: DateTime.now.utc.in_time_zone('Eastern Time (US & Canada)'))
   end
 
   # Match class
@@ -31,7 +31,7 @@ class SessionsController < ApplicationController
 	  end
 
 	 	def info
-	 		return "#{@team1} vs #{@team2} at #{@printable_time}"
+	 		return "#{@team1} vs #{@team2} on #{@printable_time}"
 	 	end
 	end
 
@@ -168,7 +168,7 @@ class SessionsController < ApplicationController
 		client.execute(batch)
 
 		# Save Import in database
-		ImportAttempt.create(succeeded: true, match_count: @matches.count, api_token: auth.token, time: DateTime.now)
+		ImportAttempt.create(succeeded: true, match_count: @matches.count, api_token: auth.token, time: DateTime.now.utc.in_time_zone('Eastern Time (US & Canada)'))
 
 		# Done
 		puts "Match Import Complete!"
