@@ -124,6 +124,9 @@ spl_calendar_id = create_spl.data.id
 
 puts "Importing Matches..."
 
+# Create Batch Request
+batch = Google::APIClient::BatchRequest.new
+
 # Creates Events for each of the Matches
 matches.each do |match|
   match_event = {
@@ -138,15 +141,19 @@ matches.each do |match|
     }
   }
 
-  create_match = client.execute(
+  post_match_request = {
     :api_method => calendar.events.insert,
     :parameters => {'calendarId' => spl_calendar_id},
     :body => JSON.dump(match_event),
     :headers => {'Content-Type' => 'application/json'}
-  )
+  }
 
+  batch.add(post_match_request)
   match.print
 end
+
+# Send Batch Request
+client.execute(batch)
 
 # Done
 puts "Match Import Complete!"
