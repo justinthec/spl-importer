@@ -2,6 +2,11 @@ class SessionsController < ApplicationController
   def index
   end
 
+  def failure
+  	# Save Import in database
+		ImportAttempt.create(succeeded: false, match_count: 0, time: DateTime.now)
+  end
+
   # Match class
 	class Match
 	  attr_reader :team1, :team2, :starttime, :endtime
@@ -31,7 +36,7 @@ class SessionsController < ApplicationController
 	end
 
   def success
-    @auth = request.env['omniauth.auth']['credentials']
+    auth = request.env['omniauth.auth']['credentials']
 
 		require 'nokogiri'
 		require 'open-uri'
@@ -44,13 +49,13 @@ class SessionsController < ApplicationController
 		require 'date'
 
 		# Pages array to store the pages we will pull the matches from
-		@pages = ['http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_1/Round_Robin',
+		pages = ['http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_1/Round_Robin',
 		         'http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_2/Round_Robin']
 
 		# Matches array to store the matches we will add to the Calendar
 		@matches = []
 
-		@pages.each do |page|
+		pages.each do |page|
 		  # Open Liquipedia Page for parsing the matches
 		  doc = Nokogiri::HTML(open(page))
 
@@ -86,7 +91,7 @@ class SessionsController < ApplicationController
 		)
 
 		# Authenticate our client with the token we recieved from the Google API
-		client.authorization.access_token = @auth['token']
+		client.authorization.access_token = auth['token']
 
 		# Initialize Google Calendar API. Note this will make a request to the
 		# discovery service every time, so be sure to use serialization
@@ -161,6 +166,9 @@ class SessionsController < ApplicationController
 
 		# Send Batch Request
 		client.execute(batch)
+
+		# Save Import in database
+		ImportAttempt.create(succeeded: true, match_count: @matches.count, api_token: auth.token, time: DateTime.now)
 
 		# Done
 		puts "Match Import Complete!"

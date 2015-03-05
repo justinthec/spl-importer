@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  succeeded: false
+  match_count: 1
+  api_token: MyString
+  time: 2015-03-04 22:03:23
+
+two:
+  succeeded: false
+  match_count: 1
+  api_token: MyString
+  time: 2015-03-04 22:03:23
