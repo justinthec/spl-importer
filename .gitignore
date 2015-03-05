@@ -33,3 +33,6 @@ pickle-email-*.html
 
 # OSX DS Store
 .DS_Store
+
+# Google API Client Secrets "sssssshh!"
+client_secrets.json
