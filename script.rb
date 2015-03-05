@@ -19,17 +19,21 @@ matches = []
 
 # Match class
 class Match
-  attr_reader :team1, :team2, :startyear, :startmonth, :startdate, :starthour, :startmin
+  attr_reader :team1, :team2, :starttime, :endtime
 
-  def initialize(team1, team2, printable_time, startyear, startmonth, startdate, starthour, startmin)
+  def initialize(team1, team2, startyear, startmonth, startdate, starthour, startmin, timezone)
     @team1 = team1
     @team2 = team2
-    @printable_time = printable_time
-    @startyear = Integer(startyear)
-    @startmonth = Integer(startmonth)
-    @startdate = Integer(startdate)
-    @starthour = Integer(starthour)
-    @startmin = Integer(startmin)
+
+    startyear = startyear.to_i
+    startmonth = startmonth.to_i
+    startdate = startdate.to_i
+    starthour = starthour.to_i
+    startmin = startmin.to_i
+
+    @starttime = DateTime.new(startyear, startmonth, startdate, starthour, startmin, 0, timezone)
+    @endtime = DateTime.new(startyear, startmonth, startdate, starthour+1, startmin, 0, timezone)
+    @printable_time = @starttime.strftime('%B %-d, %Y %k:%M %Z')
   end
   
   def print
@@ -47,6 +51,7 @@ pages.each do |page|
       team1 = match.css('table')[0].css('tr td')[0].content.gsub("\302\240", ' ').strip
       team2 = match.css('table')[0].css('tr td')[3].content.gsub("\302\240", ' ').strip
       time = match.css('table')[1].css('tr th span').select{|link| link['style'] =~ /margin-left:.*40px;.*font-size:.*85%;.*line-height:.*90%;/}[0].text
+      timezone = match.css('table')[1].css('tr th span').select{|link| link['style'] =~ /margin-left:.*40px;.*font-size:.*85%;.*line-height:.*90%;/}[0].css('abbr')[0]['data-tz']
 
       time_array = time.split
       year = time_array[2]
@@ -55,8 +60,10 @@ pages.each do |page|
       hour = time_array[3].slice(0..1)
       min = time_array[3].slice(3..4)
 
-      match = Match.new(team1, team2, time, year, month, date, hour, min)
-      matches.push(match)
+      match = Match.new(team1, team2, year, month, date, hour, min, timezone)
+      if(match.endtime > DateTime.now) then
+        matches.push(match)
+      end
     end
   end
 end
@@ -132,11 +139,11 @@ matches.each do |match|
   match_event = {
     'summary' => "#{match.team1} vs #{match.team2}",
     'start' => {
-      'dateTime' => DateTime.new(match.startyear, match.startmonth, match.startdate, match.starthour, match.startmin, 0, '+9').to_s,
+      'dateTime' => match.starttime.to_s,
       'timeZone' => "Asia/Seoul"
     },
     'end' => {
-      'dateTime' => DateTime.new(match.startyear, match.startmonth, match.startdate, match.starthour+1, match.startmin, 0, '+9').to_s,
+      'dateTime' => match.endtime.to_s, 
       'timeZone' => "Asia/Seoul"
     }
   }
