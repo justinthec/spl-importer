@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def failure
   	# Save Import in database
-		ImportAttempt.create(succeeded: false, match_count: 0, time: DateTime.now.utc.in_time_zone('Eastern Time (US & Canada)'))
+		ImportAttempt.create(succeeded: false, match_count: 0, time: DateTime.now.utc.in_time_zone('Eastern Time (US & Canada)').to_s)
   end
 
   # Match class
@@ -168,7 +168,7 @@ class SessionsController < ApplicationController
 		client.execute(batch)
 
 		# Save Import in database
-		ImportAttempt.create(succeeded: true, match_count: @matches.count, api_token: auth.token, time: DateTime.now.utc.in_time_zone('Eastern Time (US & Canada)'))
+		ImportAttempt.create(succeeded: true, match_count: @matches.count, api_token: auth.token, time: DateTime.now.utc.in_time_zone('Eastern Time (US & Canada)').to_s)
 
 		# Done
 		puts "Match Import Complete!"
