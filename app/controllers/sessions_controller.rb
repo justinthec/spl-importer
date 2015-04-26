@@ -36,20 +36,11 @@ class SessionsController < ApplicationController
 	end
 
   def success
+		bench_start = Time.now
     auth = request.env['omniauth.auth']['credentials']
 
-		require 'nokogiri'
-		require 'open-uri'
-
-		require 'google/api_client'
-		require 'google/api_client/client_secrets'
-		require 'google/api_client/auth/installed_app'
-
-		require 'json'
-		require 'date'
-
 		# Pages array to store the pages we will pull the matches from
-		pages = ['http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_2/Round_Robin']
+		pages = ['http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_3/Round_Robin']
 
 		# Matches array to store the matches we will add to the Calendar
 		@matches = []
@@ -85,95 +76,96 @@ class SessionsController < ApplicationController
 		end
 
 		puts "#{@matches.count} Matches found..."
+		if @matches.any?
+			# Initialize the client.
+			client = Google::APIClient.new(
+			  :application_name => 'SPL Importer',
+			  :application_version => '1.0.0'
+			)
 
-		# Initialize the client.
-		client = Google::APIClient.new(
-		  :application_name => 'SPL Importer',
-		  :application_version => '1.0.0'
-		)
+			# Authenticate our client with the token we recieved from the Google API
+			client.authorization.access_token = auth['token']
 
-		# Authenticate our client with the token we recieved from the Google API
-		client.authorization.access_token = auth['token']
+			# Initialize Google Calendar API. Note this will make a request to the
+			# discovery service every time, so be sure to use serialization
+			# in your production code. Check the samples for more details.
+			calendar = client.discovered_api('calendar', 'v3')
 
-		# Initialize Google Calendar API. Note this will make a request to the
-		# discovery service every time, so be sure to use serialization
-		# in your production code. Check the samples for more details.
-		calendar = client.discovered_api('calendar', 'v3')
+			# Get list of calendars
+			list_of_calendars = client.execute(
+			  :api_method => calendar.calendar_list.list,
+			)
 
-		# Get list of calendars
-		list_of_calendars = client.execute(
-		  :api_method => calendar.calendar_list.list,
-		)
+			puts "Google API authenticated..."
 
-		puts "Google API authenticated..."
+			# Deletes SPL Calendar if it already exists
+			list_of_calendars.data.items.each do |calendar_item|
+			  if (calendar_item.summary == "Starcraft 2 Proleague") then
+			    puts "SPL Calendar found, deleting..."
+			    delete_spl = client.execute(
+			      :api_method => calendar.calendars.delete,
+			      :parameters => {'calendarId' => calendar_item.id}
+			    )
+			    puts "SPL Calendar deleted..."
+			  end
+			end
 
-		# Deletes SPL Calendar if it already exists
-		list_of_calendars.data.items.each do |calendar_item|
-		  if (calendar_item.summary == "Starcraft 2 Proleague") then
-		    puts "SPL Calendar found, deleting..."
-		    delete_spl = client.execute(
-		      :api_method => calendar.calendars.delete,
-		      :parameters => {'calendarId' => calendar_item.id}
-		    )
-		    puts "SPL Calendar deleted..."
-		  end
+			# Creates new SPL Calendar
+			spl_calendar = {
+			  'summary' => "Starcraft 2 Proleague",
+			  'timeZone' => "Asia/Seoul"
+			}
+
+			create_spl = client.execute(
+			  :api_method => calendar.calendars.insert,
+			  :body => JSON.dump(spl_calendar),
+			  :headers => {'Content-Type' => 'application/json'}
+			)
+
+			puts "SPL Calendar created..."
+
+			# Save SPL Calendar ID for creating events
+			spl_calendar_id = create_spl.data.id
+
+			puts "Importing Matches..."
+
+			# Create Batch Request
+			batch = Google::APIClient::BatchRequest.new
+
+			# Creates Events for each of the Matches
+			@matches.each do |match|
+			  match_event = {
+			    'summary' => "#{match.team1} vs #{match.team2}",
+			    'start' => {
+			      'dateTime' => match.starttime.to_s,
+			      'timeZone' => "Asia/Seoul"
+			    },
+			    'end' => {
+			      'dateTime' => match.endtime.to_s,
+			      'timeZone' => "Asia/Seoul"
+			    }
+			  }
+
+			  post_match_request = {
+			    :api_method => calendar.events.insert,
+			    :parameters => {'calendarId' => spl_calendar_id},
+			    :body => JSON.dump(match_event),
+			    :headers => {'Content-Type' => 'application/json'}
+			  }
+
+			  batch.add(post_match_request)
+			  match.print
+			end
+
+			# Send Batch Request
+			client.execute(batch)
 		end
-
-		# Creates new SPL Calendar
-		spl_calendar = {
-		  'summary' => "Starcraft 2 Proleague",
-		  'timeZone' => "Asia/Seoul"
-		}
-
-		create_spl = client.execute(
-		  :api_method => calendar.calendars.insert,
-		  :body => JSON.dump(spl_calendar),
-		  :headers => {'Content-Type' => 'application/json'}
-		)
-
-		puts "SPL Calendar created..."
-
-		# Save SPL Calendar ID for creating events
-		spl_calendar_id = create_spl.data.id
-
-		puts "Importing Matches..."
-
-		# Create Batch Request
-		batch = Google::APIClient::BatchRequest.new
-
-		# Creates Events for each of the Matches
-		@matches.each do |match|
-		  match_event = {
-		    'summary' => "#{match.team1} vs #{match.team2}",
-		    'start' => {
-		      'dateTime' => match.starttime.to_s,
-		      'timeZone' => "Asia/Seoul"
-		    },
-		    'end' => {
-		      'dateTime' => match.endtime.to_s,
-		      'timeZone' => "Asia/Seoul"
-		    }
-		  }
-
-		  post_match_request = {
-		    :api_method => calendar.events.insert,
-		    :parameters => {'calendarId' => spl_calendar_id},
-		    :body => JSON.dump(match_event),
-		    :headers => {'Content-Type' => 'application/json'}
-		  }
-
-		  batch.add(post_match_request)
-		  match.print
-		end
-
-		# Send Batch Request
-		client.execute(batch)
 
 		# Save Import in database
 		ImportAttempt.create(succeeded: true, match_count: @matches.count, api_token: auth.token, time: DateTime.now.utc.in_time_zone('Eastern Time (US & Canada)').to_s)
 
 		# Done
 		puts "Match Import Complete!"
-
+		puts "Elapsed time: #{Time.now - bench_start}"
   end
 end

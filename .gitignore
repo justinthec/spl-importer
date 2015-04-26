@@ -34,5 +34,11 @@ pickle-email-*.html
 # OSX DS Store
 .DS_Store
 
-# Google API Client Secrets "sssssshh!"
+# Google API Client Secrets sssssshh!
 client_secrets.json
+
+# Ngrok
+ngrok
+
+# Local Env Variable
+/config/local_env.yml
