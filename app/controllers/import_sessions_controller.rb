@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class ImportSessionsController < ApplicationController
   def index
   end
 
@@ -7,73 +7,31 @@ class SessionsController < ApplicationController
 		ImportAttempt.create(succeeded: false, match_count: 0, time: DateTime.now.utc.in_time_zone('Eastern Time (US & Canada)').to_s)
   end
 
-  # Match class
-	class Match
-	  attr_reader :team1, :team2, :starttime, :endtime
+  def hosted_calendar_success
+  	@hosted_calendar_token_updated = false
 
-	  def initialize(team1, team2, startyear, startmonth, startdate, starthour, startmin, timezone)
-	    @team1 = team1
-	    @team2 = team2
-
-	    startyear = startyear.to_i
-	    startmonth = startmonth.to_i
-	    startdate = startdate.to_i
-	    starthour = starthour.to_i
-	    startmin = startmin.to_i
-
-	    @starttime = DateTime.new(startyear, startmonth, startdate, starthour, startmin, 0, timezone)
-	    @endtime = DateTime.new(startyear, startmonth, startdate, starthour+1, startmin, 0, timezone)
-	    @printable_time = @starttime.strftime('%B %-d, %Y %k:%M %Z')
-	  end
-	  
-	  def print
-	    puts self.info
-	  end
-
-	 	def info
-	 		return "#{@team1} vs #{@team2} on #{@printable_time}"
-	 	end
-	end
+  	@auth = request.env['omniauth.auth']
+  	@email = @auth['info']['email']
+  	unless @email == "starcraft2calendar@gmail.com"
+  		return
+  	end
+  	@auth = @auth['credentials']
+  	token = Token.find_or_initialize_by(email: @email)
+		token.update(
+  		access_token: @auth['token'],
+  		expires_at: Time.at(@auth['expires_at']).to_datetime)
+		unless token.refresh_token.present?
+			token.update(
+				refresh_token: @auth['refresh_token'])
+		end
+		@hosted_calendar_token_updated = true
+  end
 
   def success
 		bench_start = Time.now
     auth = request.env['omniauth.auth']['credentials']
 
-		# Pages array to store the pages we will pull the matches from
-		pages = ['http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_3/Round_Robin']
-
-		# Matches array to store the matches we will add to the Calendar
-		@matches = []
-
-		pages.each do |page|
-		  # Open Liquipedia Page for parsing the matches
-		  doc = Nokogiri::HTML(open(page))
-
-		  # Parse through the HTML for the match info and populate the matches array
-		  doc.css('#mw-content-text div[style="display:inline-block; vertical-align: top; margin: 0 0 0 0;padding-right:2em;"]').each do |match|
-		    if (match.content.strip != "") then
-		    	match_table_row = match.css('table')[0].css('tr td')
-		    	time_container = match.css('table')[1].css('tr th span').select{|link| link['style'] =~ /margin-left:.*40px;.*font-size:.*85%;.*line-height:.*90%;/}[0]	
-
-		      team1 = match_table_row[0].content.gsub("\302\240", ' ').strip
-		      team2 = match_table_row[3].content.gsub("\302\240", ' ').strip
-		      time = time_container.text
-          timezone = time_container.css('abbr')[0]['data-tz']
-
-		      time_segments = time.split
-		      year = time_segments[2]
-		      month = Date::MONTHNAMES.index(time_segments[0])
-		      date = time_segments[1].gsub(/,/, '')
-		      hour = time_segments[3].slice(0..1)
-		      min = time_segments[3].slice(3..4)
-
-		      match = Match.new(team1, team2, year, month, date, hour, min, timezone)
-		      if(match.endtime > DateTime.now) then
-		        @matches.push(match)
-		      end
-		    end
-		  end
-		end
+    @matches = Proleague.matches
 
 		puts "#{@matches.count} Matches found..."
 		if @matches.any?

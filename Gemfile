@@ -12,4 +12,7 @@ gem 'uglifier'
 gem 'nokogiri'
 gem 'google-api-client'
 gem 'newrelic_rpm'
-ruby "2.1.2"
+gem 'dotenv-rails', :groups => [:development, :test]
+gem 'rest-client'
+gem 'pry'
+ruby "2.2.1"

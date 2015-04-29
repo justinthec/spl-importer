@@ -1,6 +1,6 @@
 SplImporter::Application.routes.draw do
-  root to: 'sessions#index'
-  resources :sessions, only: :index
-  get "/auth/:provider/callback" => 'sessions#success'
-  get "/auth/failure" => 'sessions#failure'
+  root to: 'import_sessions#index'
+  resources :import_sessions, only: :index
+  get "/auth/:provider/callback" => 'import_sessions#hosted_calendar_success'
+  get "/auth/failure" => 'import_sessions#failure'
 end

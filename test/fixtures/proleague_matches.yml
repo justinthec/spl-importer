@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team1: MyString
+  team2: MyString
+  starttime: 2015-04-29 00:11:51
+  endtime: 2015-04-29 00:11:51
+
+two:
+  team1: MyString
+  team2: MyString
+  starttime: 2015-04-29 00:11:51
+  endtime: 2015-04-29 00:11:51
