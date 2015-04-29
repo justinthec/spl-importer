@@ -4,9 +4,16 @@
   </div>
   <br />
   <div class="row text-center">
-    <%= link_to "Import Schedule", '/auth/google_oauth2', class: "btn", id: "authButton", data: { wipe: "Import Schedule" } %>
+    <div class="col-md-6 col-md-offset-3">
+      <h4>
+        <p>Bring the Starcraft 2 Proleague Schedule to your Google Calendar</p>
+      </h4>
+    </div>
   </div>
   <br />
+  <div class="row text-center">
+    <%= link_to "Import Schedule", '/auth/google_oauth2', class: "btn", id: "authButton", data: { wipe: "Import Schedule" } %>
+  </div>
   <div class="row text-center">
     <div class="loader" id="spinner">
       Loading...
@@ -17,13 +24,10 @@
   </div>
   <br />
   <div class="row text-center">
-    <div class="col-md-6 col-md-offset-3">
-      <h4>
-        <p>Bring the Starcraft 2 Proleague Schedule to your Google Calendar</p>
-      </h4>
-    </div>
+    <iframe class="hosted-calendar" src="https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23F1F1F2&amp;src=uuddgqq25dhl6cfqrld0guhdh4%40group.calendar.google.com&amp;color=%230D9DDA&amp;ctz=Asia%2FSeoul" style=" border-width:0 " width="1000" height="600" frameborder="0" scrolling="no"></iframe>
   </div>
 </div>
+<br />
 <footer class="footer">
   <div class="container">
     <p class="text-right">Made with love by <a href="http://justinthec.me" target="_blank">Justin Chan</a></p>
