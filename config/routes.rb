@@ -3,4 +3,5 @@ SplImporter::Application.routes.draw do
   resources :import_sessions, only: :index
   get "/auth/:provider/callback" => 'import_sessions#success'
   get "/auth/failure" => 'import_sessions#failure'
+  get "/subscribe" => 'subscriptions#new'
 end

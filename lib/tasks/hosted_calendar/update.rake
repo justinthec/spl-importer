@@ -32,36 +32,41 @@ namespace :hosted_calendar do
 
       puts "Google API authenticated..."
 
+      spl_calendar_id = nil
+
       # Deletes SPL Calendar if it already exists
       list_of_calendars.data.items.each do |calendar_item|
         if (calendar_item.summary == "Starcraft 2 Proleague") then
-          puts "SPL Calendar found, deleting..."
-          delete_spl = client.execute(
-            :api_method => calendar.calendars.delete,
-            :parameters => {'calendarId' => calendar_item.id}
-          )
-          puts "SPL Calendar deleted..."
+          puts "SPL Calendar found, deleting existing matches..."
+
+	  list_of_existing_matches = client.execute(
+	    :api_method => calendar.events.list,
+	    :parameters => {'calendarId' => calendar_item.id}
+	  )
+
+          # Create Batch Request
+          batch = Google::APIClient::BatchRequest.new
+
+	  list_of_existing_matches.data.items.each do |match|
+	    delete_match_request = {
+	     :api_method => calendar.events.delete,
+	     :parameters => {'calendarId' => calendar_item.id, 'eventId' => match.id}
+	    }
+
+            batch.add(delete_match_request)
+	  end
+
+	  client.execute(batch)
+
+          # Save SPL Calendar ID for creating events
+	  spl_calendar_id = calendar_item.id
+
+          puts "SPL Calendar matches deleted..."
         end
       end
 
-      # Creates new SPL Calendar
-      spl_calendar = {
-        'summary' => "Starcraft 2 Proleague",
-        'timeZone' => "Asia/Seoul"
-      }
 
-      create_spl = client.execute(
-        :api_method => calendar.calendars.insert,
-        :body => JSON.dump(spl_calendar),
-        :headers => {'Content-Type' => 'application/json'}
-      )
-
-      puts "SPL Calendar created..."
-
-      # Save SPL Calendar ID for creating events
-      spl_calendar_id = create_spl.data.id
-
-      puts "Importing Matches..."
+      puts "Adding New Matches..."
 
       # Create Batch Request
       batch = Google::APIClient::BatchRequest.new
