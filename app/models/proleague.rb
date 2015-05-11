@@ -34,9 +34,7 @@ class Proleague
 		      min = time_segments[3].slice(3..4)
 
 		      match = ProleagueMatch.new(team1, team2, year, month, date, hour, min, timezone)
-		      if(match.endtime > DateTime.now) then
-		        matches.push(match)
-		      end
+		      matches.push(match)
 		    end
 		  end
 		end
