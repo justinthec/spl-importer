@@ -34,7 +34,7 @@ namespace :hosted_calendar do
 
       spl_calendar_id = nil
 
-      # Deletes SPL Calendar if it already exists
+      # Deletes SPL Calendar matches if they already exist
       list_of_calendars.data.items.each do |calendar_item|
         if (calendar_item.summary == "Starcraft 2 Proleague") then
           puts "SPL Calendar found, deleting existing matches..."
