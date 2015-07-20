@@ -1,6 +1,16 @@
 namespace :database_calendar do
   desc "Updates the local calendar in the database with new data"
-  task :update do
-    puts "updating..." #use ProleagueMatch.create to save the matches in the database. Also check to see if they exists first before creating.
+  task :update => :environment do
+    @matches = Proleague.matches
+
+    puts "#{@matches.count} Matches found..."
+    if @matches.any?
+      @matches.each do |match|
+        match.print
+      end
+    end
+
+    # Done
+    puts "Local Calendar Update Complete!"
   end
 end

@@ -4,7 +4,7 @@ class Proleague
 	# Pages array to store the pages we will pull the matches from
 	@@pages = [
 		#'http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_3',
-		'http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_3/Round_Robin'
+		'http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_4/Round_Robin'
 	]
 
 	def self.matches
