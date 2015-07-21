@@ -46,17 +46,23 @@ namespace :hosted_calendar do
 
           # Create Batch Request
           batch = Google::APIClient::BatchRequest.new
+          batch_size = 0
 
 	  list_of_existing_matches.data.items.each do |match|
 	    delete_match_request = {
 	     :api_method => calendar.events.delete,
 	     :parameters => {'calendarId' => calendar_item.id, 'eventId' => match.id}
 	    }
+            
+            puts "Existing match found: #{match}"
 
+            batch_size += 1
             batch.add(delete_match_request)
 	  end
 
-	  client.execute(batch)
+	  if batch_size > 0 then 
+            client.execute(batch)
+          end
 
           # Save SPL Calendar ID for creating events
 	  spl_calendar_id = calendar_item.id
