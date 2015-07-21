@@ -39,26 +39,40 @@ namespace :hosted_calendar do
         if (calendar_item.summary == "Starcraft 2 Proleague") then
           puts "SPL Calendar found, deleting existing matches..."
 
-	  list_of_existing_matches = client.execute(
-	    :api_method => calendar.events.list,
-	    :parameters => {'calendarId' => calendar_item.id}
-	  )
-
           # Create Batch Request
           batch = Google::APIClient::BatchRequest.new
           batch_size = 0
 
-	  list_of_existing_matches.data.items.each do |match|
-	    delete_match_request = {
-	     :api_method => calendar.events.delete,
-	     :parameters => {'calendarId' => calendar_item.id, 'eventId' => match.id}
-	    }
+          # Parse through events in the calendar
+          page_token = nil
+	  result = client.execute(
+	    :api_method => calendar.events.list,
+	    :parameters => {'calendarId' => calendar_item.id}
+	  )
+          while true
+            existing_matches = result.data.items
+            existing_matches.each do |match|
+	      delete_match_request = {
+	       :api_method => calendar.events.delete,
+	       :parameters => {'calendarId' => calendar_item.id, 'eventId' => match.id}
+	      }
             
-            puts "Existing match found: #{match}"
+              puts "Deleting existing match: #{match}"
 
-            batch_size += 1
-            batch.add(delete_match_request)
-	  end
+              batch_size += 1
+              batch.add(delete_match_request)
+            end
+            if !(page_token = result.data.next_page_token)
+              break
+            end
+	    result = client.execute(
+	      :api_method => calendar.events.list,
+	      :parameters => {
+                'calendarId' => calendar_item.id,
+                'pageToken' => page_token
+              }
+	    )
+          end
 
 	  if batch_size > 0 then 
             client.execute(batch)
