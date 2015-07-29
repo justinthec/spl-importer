@@ -12,25 +12,12 @@
   </div>
   <br />
   <div class="row text-center">
-    <%= link_to "Subscribe to Calendar", '/subscribe', class: "btn", id: "subscrubeButton", target: "_newtab", data: { wipe: "Subscribe to Calendar" } %>
+    <%= link_to "Subscribe to Calendar", '/subscribe', class: "btn", id: "subscribeButton", target: "_newtab", data: { wipe: "Subscribe to Calendar" } %>
   </div>
   <br />
-  <div class="row text-center">
-    <iframe class="hosted-calendar" src="https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTabs=1&amp;showCalendars=0&amp;showTz=1&amp;height=600&amp;wkst=1&amp;bgcolor=%23F1F1F2&amp;src=hhlra37v3ok5968in4lui1a9i0%40group.calendar.google.com&amp;color=%230D9DDA&amp;ctz=Asia%2FSeoul" style=" border-width:0 " width="1000" height="600" frameborder="0" scrolling="no"></iframe>
-  </div>
-  <div class="row text-center">
-    <span>Or alternatively make a copy of the matches into your own Calendar using a  </span>
-    <%= link_to "Direct Import", '/auth/google_oauth2', class: "", id: "authButton" %>
+  <div id="calendar-container" class="row text-center">
   </div>
   <br />
-  <div class="row text-center">
-    <div class="loader" id="spinner">
-      Loading...
-      <div class="ball"></div>
-      <div class="ball"></div>
-      <div class="ball"></div>
-    </div>
-  </div>
 </div>
 <br />
 <footer class="footer">

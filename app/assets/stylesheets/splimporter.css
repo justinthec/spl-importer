@@ -14,6 +14,7 @@ body {
   max-height: 42px;
   width: auto;
   transition: opacity 0.5s ease;
+  transition: 0.5s ease;
 }
 
 .spl-logo:hover, a.spl-link:hover .spl-logo {
@@ -27,12 +28,30 @@ a.spl-link {
   width: 100%;
   transition: 0.5s ease;
   letter-spacing: 3px;
-  margin: 40px;
   color: #01429A;
 }
 
 a.spl-link:hover {
   color: #3367AF;
+}
+
+@media (max-width: 755px) {
+  a.spl-link {
+    font-size: 33px;
+  }
+
+  .spl-logo {
+    max-height: 20px;
+  }
+}
+
+.hosted-calendar {
+  width: 100%;
+  height: inherit;
+}
+
+#calendar-container {
+  height: 800px;
 }
 
 .spl-link-container {

@@ -80,6 +80,7 @@ namespace :hosted_calendar do
 
           # Save SPL Calendar ID for creating events
 	  spl_calendar_id = calendar_item.id
+          puts "SPL Calendar ID: #{spl_calendar_id}"
 
           puts "SPL Calendar matches deleted..."
         end
