@@ -18,7 +18,7 @@ class Proleague
 
       # Parse through the HTML for the match info and populate the matches array
       doc.css('div[style="display:inline-block; vertical-align: top; margin: 0 0 0 0;padding-right:2em;"]').each do |match|
-        if (match.content.strip != "") then
+        if (match.content.strip != "")
           match_table_row = match.css('table')[0].css('tr td')
           time_container = match.css('table')[1].css('tr th span').select{|link| link['style'] =~ /margin-left:.*40px;.*font-size:.*85%;.*line-height:.*90%;/}[0]
 
@@ -27,12 +27,12 @@ class Proleague
           time = time_container.text
           timezone = time_container.css('abbr')[0]['data-tz']
 
-          time_segments = time.split
-          year = time_segments[2]
-          month = Date::MONTHNAMES.index(time_segments[0])
-          date = time_segments[1].gsub(/,/, '')
-          hour = time_segments[3].slice(0..1)
-          min = time_segments[3].slice(3..4)
+          year = /\d{4}/.match(time)[0] # \d{4}
+          month = Date::MONTHNAMES.index(/[A-Z][a-z]+/.match(time)[0]) # [A-Z][a-z]+
+          date = /\s([1-9]|[1-2][0-9]|3[0-1])(\s|\,)/.match(time)[0].gsub(/,/, '').strip # \s([1-9]|[1-2][0-9]|3[0-1])(\s|\,)
+          hour_min = /(\d{2}\:\d{2})|(\s\d:\d{2})/.match(time)[0].strip # (\d{2}\:\d{2})|(\s\d:\d{2})
+          hour = hour_min.split(':')[0]
+          min = hour_min.split(':')[1]
 
           match = ProleagueMatch.new(team1, team2, year, month, date, hour, min, timezone)
           matches.push(match)
