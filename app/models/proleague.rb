@@ -5,7 +5,8 @@ class Proleague
   @@pages = [
     #'http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_3',
     #'http://wiki.teamliquid.net/starcraft2/2015_Proleague/Round_4/Round_Robin',
-    'http://wiki.teamliquid.net/starcraft2/2016_Proleague/Round_1/Round_Robin'
+    #'http://wiki.teamliquid.net/starcraft2/2016_Proleague/Round_1/Round_Robin',
+    'http://wiki.teamliquid.net/starcraft2/2016_Proleague/Round_2/Round_Robin'
   ]
 
   def self.matches
