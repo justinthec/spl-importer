@@ -45,47 +45,48 @@ namespace :hosted_calendar do
 
           # Parse through events in the calendar
           page_token = nil
-	  result = client.execute(
-	    :api_method => calendar.events.list,
-	    :parameters => {'calendarId' => calendar_item.id}
-	  )
+          result = client.execute(
+            :api_method => calendar.events.list,
+            :parameters => {'calendarId' => calendar_item.id}
+          )
           while true
             existing_matches = result.data.items
             existing_matches.each do |match|
-	      delete_match_request = {
-	       :api_method => calendar.events.delete,
-	       :parameters => {'calendarId' => calendar_item.id, 'eventId' => match.id}
-	      }
-            
+              delete_match_request = {
+                :api_method => calendar.events.delete,
+                :parameters => {'calendarId' => calendar_item.id, 'eventId' => match.id}
+              }
+
               puts "Deleting existing match: #{match}"
 
               batch_size += 1
               batch.add(delete_match_request)
             end
+
             if !(page_token = result.data.next_page_token)
               break
             end
-	    result = client.execute(
-	      :api_method => calendar.events.list,
-	      :parameters => {
-                'calendarId' => calendar_item.id,
-                'pageToken' => page_token
+
+            result = client.execute(
+              :api_method => calendar.events.list,
+              :parameters => {
+                      'calendarId' => calendar_item.id,
+                      'pageToken' => page_token
               }
-	    )
+            )
           end
 
-	  if batch_size > 0 then 
+          if batch_size > 0 then
             client.execute(batch)
           end
 
           # Save SPL Calendar ID for creating events
-	  spl_calendar_id = calendar_item.id
+          spl_calendar_id = calendar_item.id
           puts "SPL Calendar ID: #{spl_calendar_id}"
 
           puts "SPL Calendar matches deleted..."
         end
       end
-
 
       puts "Adding New Matches..."
 
